@@ -9,6 +9,7 @@ import {RouterModule} from '@angular/router';
 import { NodeTypesComponent } from './components/node-types/node-types.component';
 import { EdgeTypesComponent } from './components/edge-types/edge-types.component';
 import { EdgeArrowTypesComponent } from './components/edge-arrow-types/edge-arrow-types.component';
+import { ColaComponent } from './components/cola/cola.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EdgeArrowTypesComponent } from './components/edge-arrow-types/edge-arro
     LabelsComponent,
     NodeTypesComponent,
     EdgeTypesComponent,
-    EdgeArrowTypesComponent
+    EdgeArrowTypesComponent,
+    ColaComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { EdgeArrowTypesComponent } from './components/edge-arrow-types/edge-arro
       {path: 'labels', component: LabelsComponent},
       {path: 'node-types', component: NodeTypesComponent},
       {path: 'edge-types', component: EdgeTypesComponent},
-      {path: 'edge-arrow-types', component: EdgeArrowTypesComponent}
+      {path: 'edge-arrow-types', component: EdgeArrowTypesComponent},
+      {path: 'cola', component: ColaComponent}
     ]),
   ],
   providers: [],

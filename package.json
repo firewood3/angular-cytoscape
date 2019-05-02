@@ -19,10 +19,18 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
+    "cytoscape": "^3.5.5",
+    "cytoscape-cola": "^2.3.0",
+    "cytoscape-popper": "^1.0.4",
+    "font-awesome": "^4.7.0",
+    "popper.js": "^1.15.0",
     "rxjs": "~6.3.3",
+    "tippy.js": "^4.3.0",
     "tslib": "^1.9.0",
+    "webcola": "^3.3.9",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

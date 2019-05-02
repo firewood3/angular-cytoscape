@@ -24,12 +24,21 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
               "src/styles.css"
+
             ],
             "scripts": [
-              "src/libs/cytoscape/cytoscape.min.js",
-              "src/libs/cytoscape/my-person.js"
+
+              "node_modules/cytoscape/dist/cytoscape.min.js",
+              "node_modules/lodash/lodash.min.js",
+              "node_modules/webcola/WebCola/cola.min.js",
+              "node_modules/tippy.js/umd/index.all.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/cytoscape-cola/cytoscape-cola.js",
+              "node_modules/cytoscape-popper/cytoscape-popper.js"
             ],
+
             "es5BrowserSupport": true
           },
           "configurations": {
