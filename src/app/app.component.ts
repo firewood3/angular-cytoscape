@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+declare const getPerson:any;
+declare const cytoscape: any;
 
 @Component({
   selector: 'app-root',
