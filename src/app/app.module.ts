@@ -2,14 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NavComponent } from './components/nav/nav.component';
-import { LinkoutComponent } from './components/cy/linkout/linkout.component';
-import { LabelsComponent } from './components/cy/labels/labels.component';
-import {RouterModule} from '@angular/router';
-import { NodeTypesComponent } from './components/cy/node-types/node-types.component';
-import { EdgeTypesComponent } from './components/cy/edge-types/edge-types.component';
-import { EdgeArrowTypesComponent } from './components/cy/edge-arrow-types/edge-arrow-types.component';
-import { ColaComponent } from './components/cy/cola/cola.component';
+import { NavComponent } from './components/workspace/nav/nav.component';
+import { LinkoutComponent } from './components/workspace/cy/linkout/linkout.component';
+import { LabelsComponent } from './components/workspace/cy/labels/labels.component';
+import { NodeTypesComponent } from './components/workspace/cy/node-types/node-types.component';
+import { EdgeTypesComponent } from './components/workspace/cy/edge-types/edge-types.component';
+import { EdgeArrowTypesComponent } from './components/workspace/cy/edge-arrow-types/edge-arrow-types.component';
+import { ColaComponent } from './components/workspace/cy/cola/cola.component';
+import { LoginComponent } from './components/login/login.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { WorkspaceComponent } from './components/workspace/workspace.component';
+import { AppRoutingModule } from './app-routing.module';
+import {HttpClientModule} from '@angular/common/http';
+import {LoginService} from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -20,21 +25,18 @@ import { ColaComponent } from './components/cy/cola/cola.component';
     NodeTypesComponent,
     EdgeTypesComponent,
     EdgeArrowTypesComponent,
-    ColaComponent
+    ColaComponent,
+    LoginComponent,
+    WorkspaceComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([
-      {path: '', redirectTo: '/linkout', pathMatch: 'full'},
-      {path: 'linkout', component: LinkoutComponent},
-      {path: 'labels', component: LabelsComponent},
-      {path: 'node-types', component: NodeTypesComponent},
-      {path: 'edge-types', component: EdgeTypesComponent},
-      {path: 'edge-arrow-types', component: EdgeArrowTypesComponent},
-      {path: 'cola', component: ColaComponent}
-    ]),
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
