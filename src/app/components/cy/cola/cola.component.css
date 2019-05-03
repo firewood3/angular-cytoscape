@@ -1,14 +1,15 @@
 
-html {
-  width: 100%;
-  height: 100%;
-}
+/*html {*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*}*/
 
 body {
   font: 14px helvetica neue, helvetica, arial, sans-serif;
-  width: 100%;
+  width: 85%;
   height: 100%;
-  overflow: hidden;
+  left: 250px;
+  /*overflow: hidden;*/
 }
 
 #cy {

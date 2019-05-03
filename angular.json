@@ -29,14 +29,19 @@
 
             ],
             "scripts": [
-
               "node_modules/cytoscape/dist/cytoscape.min.js",
               "node_modules/lodash/lodash.min.js",
               "node_modules/webcola/WebCola/cola.min.js",
               "node_modules/tippy.js/umd/index.all.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/cytoscape-cola/cytoscape-cola.js",
-              "node_modules/cytoscape-popper/cytoscape-popper.js"
+              "node_modules/cytoscape-popper/cytoscape-popper.js",
+
+              "src/libs/cytoscape/data/labels.data.js",
+              "src/libs/cytoscape/data/edge-types.data.js",
+              "src/libs/cytoscape/data/edge-arrow-types.data.js",
+              "src/libs/cytoscape/data/node-types.data.js",
+              "src/libs/cytoscape/data/cola.data.js"
             ],
 
             "es5BrowserSupport": true

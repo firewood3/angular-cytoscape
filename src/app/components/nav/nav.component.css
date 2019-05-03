@@ -6,6 +6,7 @@
   transition: all 0.3s;
   height: 100%;
   position: absolute;
+  z-index: 10;
 }
 
 #sidebar .sidebar-header {

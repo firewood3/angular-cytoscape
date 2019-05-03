@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
-import { LinkoutComponent } from './components/linkout/linkout.component';
-import { LabelsComponent } from './components/labels/labels.component';
+import { LinkoutComponent } from './components/cy/linkout/linkout.component';
+import { LabelsComponent } from './components/cy/labels/labels.component';
 import {RouterModule} from '@angular/router';
-import { NodeTypesComponent } from './components/node-types/node-types.component';
-import { EdgeTypesComponent } from './components/edge-types/edge-types.component';
-import { EdgeArrowTypesComponent } from './components/edge-arrow-types/edge-arrow-types.component';
-import { ColaComponent } from './components/cola/cola.component';
+import { NodeTypesComponent } from './components/cy/node-types/node-types.component';
+import { EdgeTypesComponent } from './components/cy/edge-types/edge-types.component';
+import { EdgeArrowTypesComponent } from './components/cy/edge-arrow-types/edge-arrow-types.component';
+import { ColaComponent } from './components/cy/cola/cola.component';
 
 @NgModule({
   declarations: [
