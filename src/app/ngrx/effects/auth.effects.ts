@@ -25,13 +25,9 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.logIn(payload.userId, payload.userPw).pipe(
         map((user) => {
-          console.log("success");
-          console.log(user);
           return new LogInSuccess({token: user.token, userId: payload.userId});
         }),
         catchError((error) => {
-          console.log("fail");
-          console.log(error);
           return of(new LogInFailure({ error: error }));
         })
       );
@@ -43,7 +39,6 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
       localStorage.setItem('token', user.payload.token);
-      console.log(("success"));
       this.router.navigateByUrl('/workspace');
     })
   );

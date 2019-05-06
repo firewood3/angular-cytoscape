@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/api/auth.service';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AuthState} from '../../ngrx/states/auth.states';
@@ -18,10 +17,14 @@ export class LoginComponent implements OnInit {
   authState: Observable<any>;
   errorMessage: string | null;
 
-  constructor(private store: Store<AuthState>) { }
+  constructor(private store: Store<AuthState>) {
+    this.authState = this.store.select(selectAuthState);
+  }
 
   ngOnInit() {
-    this.authState = this.store.select(selectAuthState);
+    this.authState.subscribe((state) => {
+      this.errorMessage = state.errorMessage;
+    });
   }
 
   onSubmit(): void {
@@ -29,7 +32,6 @@ export class LoginComponent implements OnInit {
       userId: this.userId,
       userPw: this.userPw
     };
-    console.log('login');
     this.store.dispatch(new LogIn(payload));
   }
 }

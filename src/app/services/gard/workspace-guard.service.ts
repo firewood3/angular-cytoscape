@@ -10,11 +10,9 @@ export class WorkspaceGuardService implements CanActivate {
 
   canActivate(): boolean {
     if(!this.auth.getToken()) {
-      console.log('canActive - login');
       this.router.navigateByUrl('/login');
       return false;
     }
-    console.log('canActive - workspace');
     return true;
   }
 }
