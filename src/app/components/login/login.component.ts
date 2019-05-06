@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../models/user';
-import {LoginService} from '../../services/login.service';
+import {AuthService} from '../../services/api/auth.service';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {AuthState} from '../../ngrx/states/auth.states';
+import {selectAuthState} from '../../ngrx/reducers/auth.reducers';
+import {LogIn} from '../../ngrx/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -9,30 +13,23 @@ import {LoginService} from '../../services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  user: User = new User();
+  userId: string;
+  userPw: string;
+  authState: Observable<any>;
   errorMessage: string | null;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private store: Store<AuthState>) { }
 
   ngOnInit() {
+    this.authState = this.store.select(selectAuthState);
   }
 
   onSubmit(): void {
     const payload = {
-      id: this.user.id,
-      password: this.user.password
+      userId: this.userId,
+      userPw: this.userPw
     };
-    // this.store.dispatch(new LogIn(payload));
-
-    this.loginService.login(this.user.id, this.user.password)
-      .subscribe({
-        next: value => {
-          console.log(value);
-        },
-        error: err => {
-          console.log("error1");
-          console.log(err);
-        }
-      });
+    console.log('login');
+    this.store.dispatch(new LogIn(payload));
   }
 }

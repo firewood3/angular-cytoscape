@@ -13,8 +13,15 @@ import { LoginComponent } from './components/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { WorkspaceComponent } from './components/workspace/workspace.component';
 import { AppRoutingModule } from './app-routing.module';
-import {HttpClientModule} from '@angular/common/http';
-import {LoginService} from './services/login.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthService} from './services/api/auth.service';
+import {WorkspaceGuardService} from './services/gard/workspace-guard.service';
+import {StoreModule} from '@ngrx/store';
+import {authStateReducers} from './ngrx/reducers/auth.reducers';
+import {EffectsModule} from '@ngrx/effects';
+import {AuthEffects} from './ngrx/effects/auth.effects';
+import {LoginGuardService} from './services/gard/login-guard.service';
+import {ErrorInterceptor, TokenInterceptor} from './services/interceptor/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -34,9 +41,15 @@ import {LoginService} from './services/login.service';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot(authStateReducers, {})
   ],
-  providers: [LoginService],
+  providers: [
+    AuthService, WorkspaceGuardService, LoginGuardService,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

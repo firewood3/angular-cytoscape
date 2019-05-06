@@ -8,11 +8,13 @@ import {LabelsComponent} from './components/workspace/cy/labels/labels.component
 import {LinkoutComponent} from './components/workspace/cy/linkout/linkout.component';
 import {WorkspaceComponent} from './components/workspace/workspace.component';
 import {LoginComponent} from './components/login/login.component';
+import {WorkspaceGuardService} from './services/gard/workspace-guard.service';
+import {LoginGuardService} from './services/gard/login-guard.service';
 
 const routesRoot: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'workspace', component: WorkspaceComponent,
+  {path: '', redirectTo: '/workspace', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuardService]},
+  {path: 'workspace', component: WorkspaceComponent, canActivate: [WorkspaceGuardService],
     children: [
       {path: '', redirectTo:'/workspace/linkout', pathMatch: 'full' },
       {path: 'linkout', component: LinkoutComponent},
@@ -22,7 +24,8 @@ const routesRoot: Routes = [
       {path: 'edge-arrow-types', component: EdgeArrowTypesComponent},
       {path: 'cola', component: ColaComponent}
     ]
-  }
+  },
+  {path: '**', redirectTo: '/'},
 ];
 
 @NgModule({
