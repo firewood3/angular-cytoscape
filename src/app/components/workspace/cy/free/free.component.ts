@@ -26,23 +26,35 @@ export class FreeComponent implements OnInit {
         if(value.ele.color === 'white'){
           // @ts-ignore
           let node = this.cy.getElementById(value.ele.id);
+          node.removeClass('color-red');
+          node.removeClass('color-green');
+          node.removeClass('color-blue');
           node.addClass('color-white');
           // @ts-ignore
         } else if(value.ele.color === 'red'){
           // @ts-ignore
           let node = this.cy.getElementById(value.ele.id);
+          node.removeClass('color-white');
+          node.removeClass('color-green');
+          node.removeClass('color-blue');
           node.addClass('color-red');
           // @ts-ignore
         } else if(value.ele.color === 'green'){
-          console.log('green');
+          console.log('green', value);
           // @ts-ignore
-
           let node = this.cy.getElementById(value.ele.id);
+          node.removeClass('color-white');
+          node.removeClass('color-red');
+          node.removeClass('color-blue');
           node.addClass('color-green');
+          console.log("green end")
           // @ts-ignore
         } else if(value.ele.color === 'blue'){
           // @ts-ignore
           let node = this.cy.getElementById(value.ele.id);
+          node.removeClass('color-white');
+          node.removeClass('color-red');
+          node.removeClass('color-green');
           node.addClass('color-blue');
         }
       }

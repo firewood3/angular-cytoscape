@@ -18,7 +18,7 @@
     <div style="margin-left: 5px;">
       <span>Color: </span>
       <span class="mr-2">{{cyNode.color}}</span>
-      <div class="color-list">
+      <div *ngIf="cyNode.id != null" class="color-list">
         <div (click)="clickColor('red')" style="background-color: red"></div>
         <div (click)="clickColor('green')" style="background-color: green"></div>
         <div (click)="clickColor('blue')" style="background-color: blue"></div>
