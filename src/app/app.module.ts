@@ -22,6 +22,9 @@ import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './ngrx/effects/auth.effects';
 import {LoginGuardService} from './services/gard/login-guard.service';
 import {ErrorInterceptor, TokenInterceptor} from './services/interceptor/token-interceptor.service';
+import { FreeComponent } from './components/workspace/cy/free/free.component';
+import {eleStateReducer, eleStateReducers} from './ngrx/reducers/ele.reducers';
+import {EleEffects} from './ngrx/effects/ele.effects';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import {ErrorInterceptor, TokenInterceptor} from './services/interceptor/token-i
     EdgeArrowTypesComponent,
     ColaComponent,
     LoginComponent,
-    WorkspaceComponent
+    WorkspaceComponent,
+    FreeComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +46,9 @@ import {ErrorInterceptor, TokenInterceptor} from './services/interceptor/token-i
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot(authStateReducers, {})
+    EffectsModule.forRoot([AuthEffects, EleEffects]),
+    StoreModule.forRoot(authStateReducers, {}),
+    StoreModule.forRoot(eleStateReducers, {})
   ],
   providers: [
     AuthService, WorkspaceGuardService, LoginGuardService,

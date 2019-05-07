@@ -5,9 +5,7 @@ import {Injectable, Injector} from '@angular/core';
 import {Router} from '@angular/router';
 import {catchError} from 'rxjs/internal/operators/catchError';
 import {Store} from '@ngrx/store';
-import {LogOut} from '../../ngrx/actions/auth.actions';
 import {AuthState} from '../../ngrx/states/auth.states';
-import {tap} from 'rxjs/operators';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor{

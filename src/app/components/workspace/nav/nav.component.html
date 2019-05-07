@@ -3,6 +3,7 @@
     Demos <button (click)="logout()" type="submit" class="btn btn-primary ml-5">Logout</button>
   </div>
   <ul class="list-unstyled">
+    <li><a routerLink="/workspace/free">Free</a></li>
     <li><a routerLink="/workspace/linkout">Linkout</a></li>
     <li><a routerLink="/workspace/labels">Labels</a></li>
     <li><a routerLink="/workspace/node-types">Node types</a></li>
@@ -10,4 +11,20 @@
     <li><a routerLink="/workspace/edge-arrow-types">Edge arrow types</a></li>
     <li><a routerLink="/workspace/cola">Gene-Gene Graph</a></li>
   </ul>
+  <div id="nodeInfo">
+    <h3>Node Info</h3>
+    <p><span>Id: </span><span>{{cyNode.id}}</span></p>
+    <p><span>Name: </span><span>{{cyNode.name}}</span></p>
+    <div style="margin-left: 5px;">
+      <span>Color: </span>
+      <span class="mr-2">{{cyNode.color}}</span>
+      <div class="color-list">
+        <div (click)="clickColor('red')" style="background-color: red"></div>
+        <div (click)="clickColor('green')" style="background-color: green"></div>
+        <div (click)="clickColor('blue')" style="background-color: blue"></div>
+        <div (click)="clickColor('white')" style="background-color: white"></div>
+      </div>
+    </div>
+  </div>
 </nav>
+

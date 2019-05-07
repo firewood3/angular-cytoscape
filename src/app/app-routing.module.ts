@@ -10,13 +10,15 @@ import {WorkspaceComponent} from './components/workspace/workspace.component';
 import {LoginComponent} from './components/login/login.component';
 import {WorkspaceGuardService} from './services/gard/workspace-guard.service';
 import {LoginGuardService} from './services/gard/login-guard.service';
+import {FreeComponent} from './components/workspace/cy/free/free.component';
 
 const routesRoot: Routes = [
   {path: '', redirectTo: '/workspace', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, canActivate: [LoginGuardService]},
   {path: 'workspace', component: WorkspaceComponent, canActivate: [WorkspaceGuardService],
     children: [
-      {path: '', redirectTo:'/workspace/linkout', pathMatch: 'full' },
+      {path: '', redirectTo:'/workspace/free', pathMatch: 'full' },
+      {path: 'free', component: FreeComponent},
       {path: 'linkout', component: LinkoutComponent},
       {path: 'labels', component: LabelsComponent},
       {path: 'node-types', component: NodeTypesComponent},

@@ -57,11 +57,12 @@ export class LinkoutComponent implements OnInit {
       }
     });
 
-    cy.on('tap', 'node', function(){
+    cy.on('tap', 'node', function(e){
+      console.log(e);
       try { // your browser may block popups
-        window.open( this.data('href') );
+        // window.open( this.data('href') );
       } catch(e){ // fall back on url change
-        window.location.href = this.data('href');
+        // window.location.href = this.data('href');
       }
     });
 

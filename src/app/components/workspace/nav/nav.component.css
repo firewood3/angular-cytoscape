@@ -36,3 +36,26 @@
   color: #7386D5;
   background: #fff;
 }
+
+#nodeInfo {
+  width: 230px;
+  background: #6d7fcc;
+  margin-left: 10px;
+  padding: 10px 10px 10px 15px;
+}
+
+#nodeInfo p{
+  margin-left: 5px;
+}
+
+#nodeInfo .color-list {
+  display: inline-block;
+}
+
+#nodeInfo .color-list div{
+  min-width: 25px;
+  min-height: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
