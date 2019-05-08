@@ -15,11 +15,15 @@ declare const cytoscape:any;
 export class FreeComponent implements OnInit {
 
   cy : any;
-  cyNode = new CyNode();
+  cyNode: CyNode;
   selectedEle: any;
+  zoomLevel: number;
 
   constructor(public eleStore: Store<EleState>,
-              private eleEffects :EleEffects) {}
+              private eleEffects :EleEffects) {
+    this.cyNode = new CyNode();
+    this.zoomLevel = 1.0;
+  }
 
   ngOnInit() {
     this.onCy();
@@ -36,11 +40,47 @@ export class FreeComponent implements OnInit {
         this.cyNode = value.ele;
       }
     });
+
+    // canvas로 바꾼다.
+    document.getElementById('cy').addEventListener("wheel", event => {
+      // this.cy.userPanningEnabled(false);
+      // delta는 -1(down) 또는 1(up)
+
+
+      const delta = Math.sign(event.deltaY);
+      if(delta == -1) {
+        if(this.zoomLevel - 0.2 >= 0.5) {
+          this.zoomLevel = this.zoomLevel - 0.2;
+          this.cy.zoom({
+            level: this.zoomLevel,
+            position: {x: 0, y: 0}
+          });
+          this.cy.center(this.cy.nodes());
+        }
+      } else {
+        if(this.zoomLevel + 0.2 <= 3) {
+          this.zoomLevel = this.zoomLevel + 0.2;
+          this.cy.zoom({
+            level: this.zoomLevel,
+            position: {x: 0, y: 0}
+          });
+          this.cy.center(this.cy.nodes());
+        }
+      }
+      console.log(this.zoomLevel);
+    });
   }
 
   onCy() {
     this.cy = cytoscape({
       container: document.getElementById('cy'),
+      zoom: 1,
+      minZoom: 5e-1,
+      maxZoom: 3e0,
+      zoomingEnabled: true,
+      userZoomingEnabled: false,
+      pan: {x: 0, y: 0},
+
       elements: {
         nodes: [
           { data: { id: 'desktop', name: 'Cytoscape'} },
@@ -108,6 +148,17 @@ export class FreeComponent implements OnInit {
       { group: 'nodes', data: { id: 'n1', name: 'second' }, position: { x: 600, y: 600 } },
       { group: 'edges', data: { id: 'e0', source: 'n0', target: 'n1' } }
     ]);
+
+    // // this.cy.fit();
+    // this.cy.pan({
+    //   x: 0,
+    //   y: 0
+    // });
+    // this.cy.zoom({
+    //   level: this.zoomLevel,
+    //   position: {x: 0, y: 0},
+    //   // rerenderPosition: {x: 0, y: 0}
+    // });
 
     this.cy.on('tap', 'node', function(e){
       this.selectedEle = e.target;
