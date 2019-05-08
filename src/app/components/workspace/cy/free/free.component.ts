@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {EleState} from '../../../../ngrx/states/ele.states';
 import {UpdateEle} from '../../../../ngrx/actions/ele.actions';
-import {WorkspaceService} from '../../../../services/communication/workspace.service';
-import {Observable} from 'rxjs';
 import {CyNode} from '../../../../models/node';
+import {EleEffects} from '../../../../ngrx/effects/ele.effects';
 
 declare const cytoscape:any;
 
@@ -17,24 +16,24 @@ export class FreeComponent implements OnInit {
 
   cy : any;
   cyNode = new CyNode();
-  styleObservable: Observable<any>;
+  selectedEle: any;
 
   constructor(public eleStore: Store<EleState>,
-              private workspaceService: WorkspaceService) {}
+              private eleEffects :EleEffects) {}
 
   ngOnInit() {
     this.onCy();
+    this.eleEffects.UpdateStyle.subscribe({
+      next: color => {
+        if(color != this.colorResolver(this.selectedEle._private.style.color.strValue))
+          this.updateColor(color, this.cyNode.id);
+      }
+    });
+
     this.eleStore.subscribe({
       next: value => {
         // @ts-ignore
         this.cyNode = value.ele;
-      }
-    });
-
-    this.styleObservable = this.workspaceService.getStyleUpdateObservable();
-    this.styleObservable.subscribe({
-      next: color => {
-        this.updateColor(color, this.cyNode.id);
       }
     });
   }
@@ -111,6 +110,7 @@ export class FreeComponent implements OnInit {
     ]);
 
     this.cy.on('tap', 'node', function(e){
+      this.selectedEle = e.target;
       const payload = {
         id: e.target._private.data.id,
         name: e.target._private.data.name,

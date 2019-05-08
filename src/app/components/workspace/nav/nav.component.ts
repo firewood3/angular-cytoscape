@@ -31,12 +31,6 @@ export class NavComponent implements OnInit {
       next: value => {
         // @ts-ignore
         this.cyNode = value.ele;
-        // // @ts-ignore
-        // this.cyNode.id = value.ele.id;
-        // // @ts-ignore
-        // this.cyNode.name = value.ele.name;
-        // // @ts-ignore
-        // this.cyNode.color = value.ele.color;
       }
     });
   }
