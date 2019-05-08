@@ -31,35 +31,10 @@ export class FreeComponent implements OnInit {
       }
     });
 
-
     this.styleObservable = this.workspaceService.getStyleUpdateObservable();
     this.styleObservable.subscribe({
       next: color => {
-        if(color === 'white'){
-          let node = this.cy.getElementById(this.cyNode.id);
-          node.removeClass('color-red');
-          node.removeClass('color-green');
-          node.removeClass('color-blue');
-          node.addClass('color-white');
-        } else if(color === 'red'){
-          let node = this.cy.getElementById(this.cyNode.id);
-          node.removeClass('color-white');
-          node.removeClass('color-green');
-          node.removeClass('color-blue');
-          node.addClass('color-red');
-        } else if(color === 'green'){
-          let node = this.cy.getElementById(this.cyNode.id);
-          node.removeClass('color-white');
-          node.removeClass('color-red');
-          node.removeClass('color-blue');
-          node.addClass('color-green');
-        } else if(color === 'blue'){
-          let node = this.cy.getElementById(this.cyNode.id);
-          node.removeClass('color-white');
-          node.removeClass('color-red');
-          node.removeClass('color-green');
-          node.addClass('color-blue');
-        }
+        this.updateColor(color, this.cyNode.id);
       }
     });
   }
@@ -128,12 +103,6 @@ export class FreeComponent implements OnInit {
 
     var myele = this.cy.getElementById('desktop');
     myele.addClass('color-green');
-    // console.log('my', myele);
-    // console.log('my data', myele._private.data);
-    // console.log('my style', myele._private.style);
-
-    // myele.addClass('color-blue');
-
 
     var eles = this.cy.add([
       { group: 'nodes', data: { id: 'n0', name: 'first' }, position: { x: 500, y: 500 } },
@@ -142,44 +111,56 @@ export class FreeComponent implements OnInit {
     ]);
 
     this.cy.on('tap', 'node', function(e){
-      // console.log("root",e);
-      // console.log("target_private.data",e.target._private.data);
-      // console.log("target", e.target._private.style.color.strValue);
-
-      let localColor: string | null = null;
-
-      if(e.target._private.style.color.strValue === 'rgb(255,255,255)') {
-        localColor = 'white';
-        // @ts-ignore
-      } else if(e.target._private.style.color.strValue === 'rgb(0,0,255)') {
-        localColor = 'blue';
-        // @ts-ignore
-      } else if(e.target._private.style.color.strValue === 'rgb(0,128,0)') {
-        localColor = 'green';
-        // @ts-ignore
-      } else if(e.target._private.style.color.strValue === 'rgb(255,0,0)') {
-        localColor = 'red';
-      }
-
       const payload = {
         id: e.target._private.data.id,
         name: e.target._private.data.name,
-        color: localColor
+        color: this.colorResolver(e.target._private.style.color.strValue)
       };
-
       this.updateEle(payload);
-
-      try { // your browser may block popups
-        // window.open( this.data('href') );
-      } catch(e){ // fall back on url change
-        // window.location.href = this.data('href');
-      }
     }.bind(this));
 
   }
 
   updateEle(payload: any) {
     this.eleStore.dispatch(new UpdateEle(payload));
+  }
+
+  colorResolver(rgb: string): string | null{
+    switch (rgb) {
+      case 'rgb(255,255,255)' : return 'white';
+      case 'rgb(0,0,255)' : return 'blue';
+      case 'rgb(0,128,0)' : return 'green';
+      case 'rgb(255,0,0)' : return 'red';
+      default : return null;
+    }
+  }
+
+  updateColor(color: string, id: string) {
+    if(color === 'white'){
+      let node = this.cy.getElementById(id);
+      node.removeClass('color-red');
+      node.removeClass('color-green');
+      node.removeClass('color-blue');
+      node.addClass('color-white');
+    } else if(color === 'red'){
+      let node = this.cy.getElementById(id);
+      node.removeClass('color-white');
+      node.removeClass('color-green');
+      node.removeClass('color-blue');
+      node.addClass('color-red');
+    } else if(color === 'green'){
+      let node = this.cy.getElementById(id);
+      node.removeClass('color-white');
+      node.removeClass('color-red');
+      node.removeClass('color-blue');
+      node.addClass('color-green');
+    } else if(color === 'blue'){
+      let node = this.cy.getElementById(id);
+      node.removeClass('color-white');
+      node.removeClass('color-red');
+      node.removeClass('color-green');
+      node.addClass('color-blue');
+    }
   }
 
 }
