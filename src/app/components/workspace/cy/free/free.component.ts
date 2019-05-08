@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {EleState} from '../../../../ngrx/states/ele.states';
 import {UpdateEle} from '../../../../ngrx/actions/ele.actions';
+import {WorkspaceService} from '../../../../services/communication/workspace.service';
+import {Observable} from 'rxjs';
+import {CyNode} from '../../../../models/node';
 
 declare const cytoscape:any;
 
@@ -13,45 +16,45 @@ declare const cytoscape:any;
 export class FreeComponent implements OnInit {
 
   cy : any;
+  cyNode = new CyNode();
+  styleObservable: Observable<any>;
 
-  constructor(public eleStore: Store<EleState>) {}
+  constructor(public eleStore: Store<EleState>,
+              private workspaceService: WorkspaceService) {}
 
   ngOnInit() {
     this.onCy();
     this.eleStore.subscribe({
-      next: value=>{
-        console.log('free', value);
-
+      next: value => {
         // @ts-ignore
-        if(value.ele.color === 'white'){
-          // @ts-ignore
-          let node = this.cy.getElementById(value.ele.id);
+        this.cyNode = value.ele;
+      }
+    });
+
+
+    this.styleObservable = this.workspaceService.getStyleUpdateObservable();
+    this.styleObservable.subscribe({
+      next: color => {
+        if(color === 'white'){
+          let node = this.cy.getElementById(this.cyNode.id);
           node.removeClass('color-red');
           node.removeClass('color-green');
           node.removeClass('color-blue');
           node.addClass('color-white');
-          // @ts-ignore
-        } else if(value.ele.color === 'red'){
-          // @ts-ignore
-          let node = this.cy.getElementById(value.ele.id);
+        } else if(color === 'red'){
+          let node = this.cy.getElementById(this.cyNode.id);
           node.removeClass('color-white');
           node.removeClass('color-green');
           node.removeClass('color-blue');
           node.addClass('color-red');
-          // @ts-ignore
-        } else if(value.ele.color === 'green'){
-          console.log('green', value);
-          // @ts-ignore
-          let node = this.cy.getElementById(value.ele.id);
+        } else if(color === 'green'){
+          let node = this.cy.getElementById(this.cyNode.id);
           node.removeClass('color-white');
           node.removeClass('color-red');
           node.removeClass('color-blue');
           node.addClass('color-green');
-          console.log("green end")
-          // @ts-ignore
-        } else if(value.ele.color === 'blue'){
-          // @ts-ignore
-          let node = this.cy.getElementById(value.ele.id);
+        } else if(color === 'blue'){
+          let node = this.cy.getElementById(this.cyNode.id);
           node.removeClass('color-white');
           node.removeClass('color-red');
           node.removeClass('color-green');
@@ -139,9 +142,9 @@ export class FreeComponent implements OnInit {
     ]);
 
     this.cy.on('tap', 'node', function(e){
-      console.log("root",e);
+      // console.log("root",e);
       // console.log("target_private.data",e.target._private.data);
-      console.log("target", e.target._private.style.color.strValue);
+      // console.log("target", e.target._private.style.color.strValue);
 
       let localColor: string | null = null;
 

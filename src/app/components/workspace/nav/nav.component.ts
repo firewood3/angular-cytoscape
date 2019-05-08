@@ -30,25 +30,13 @@ export class NavComponent implements OnInit {
     this.eleStore.subscribe({
       next: value => {
         // @ts-ignore
-        this.cyNode.id = value.ele.id;
-        // @ts-ignore
-        this.cyNode.name = value.ele.name;
-        // @ts-ignore
-        this.cyNode.color = value.ele.color;
-        console.log(value);
-        // @ts-ignore
-        // if(value.ele.color === 'rgb(255,255,255)') {
-        //   this.cyNode.color = 'white';
-        //   // @ts-ignore
-        // } else if(value.ele.color === 'rgb(0,0,255)') {
-        //   this.cyNode.color = 'blue';
-        //   // @ts-ignore
-        // } else if(value.ele.color === 'rgb(0,128,0)') {
-        //   this.cyNode.color = 'green';
-        //   // @ts-ignore
-        // } else if(value.ele.color === 'rgb(255,0,0)') {
-        //   this.cyNode.color = 'red';
-        // }
+        this.cyNode = value.ele;
+        // // @ts-ignore
+        // this.cyNode.id = value.ele.id;
+        // // @ts-ignore
+        // this.cyNode.name = value.ele.name;
+        // // @ts-ignore
+        // this.cyNode.color = value.ele.color;
       }
     });
   }
@@ -62,6 +50,5 @@ export class NavComponent implements OnInit {
       color: color
     };
     this.eleStore.dispatch(new UpdateStyle(payload));
-    // console.log(classes);
   }
 }

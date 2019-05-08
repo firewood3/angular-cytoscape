@@ -13,7 +13,7 @@ import {LoginGuardService} from './services/gard/login-guard.service';
 import {FreeComponent} from './components/workspace/cy/free/free.component';
 
 const routesRoot: Routes = [
-  {path: '', redirectTo: '/workspace', pathMatch: 'full'},
+  {path: '', redirectTo: '/workspace/free', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, canActivate: [LoginGuardService]},
   {path: 'workspace', component: WorkspaceComponent, canActivate: [WorkspaceGuardService],
     children: [
