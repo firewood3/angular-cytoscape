@@ -1,0 +1,69 @@
+<div id="canvas">
+  <div id="table">
+    <div>
+      <h3>
+        Checkbox Selection
+        <small>
+          <a href="https://github.com/swimlane/ngx-datatable/blob/master/demo/selection/selection-chkbox.component.ts" target="_blank">
+            Source
+          </a>
+        </small>
+        <small>
+          <a href="javascript:void(0)" (click)="add()">Add</a> |
+          <a href="javascript:void(0)" (click)="update()">Update</a> |
+          <a href="javascript:void(0)" (click)="remove()">Remove</a>
+        </small>
+      </h3>
+      <div style='float:left;width:75%'>
+        <ngx-datatable
+          style="width: 90%"
+          class="material"
+          [rows]="rows"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="'auto'"
+          [limit]="5"
+          [selected]="selected"
+          [selectionType]="'checkbox'"
+          [selectAllRowsOnPage]="false"
+          [displayCheck]="displayCheck"
+          (activate)="onActivate($event)"
+          (select)='onSelect($event)'>
+          <!-- Row Detail Template -->
+          <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+              <div style="padding-left:35px;">
+                <div><strong>Address</strong></div>
+                <div>{{row.address.city}}, {{row.address.state}}</div>
+              </div>
+            </ng-template>
+          </ngx-datatable-row-detail>
+
+          <ngx-datatable-column
+            [width]="30"
+            [sortable]="false"
+            [canAutoResize]="false"
+            [draggable]="false"
+            [resizeable]="false"
+            [headerCheckboxable]="true"
+            [checkboxable]="true">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Name"></ngx-datatable-column>
+          <ngx-datatable-column name="Gender"></ngx-datatable-column>
+          <ngx-datatable-column name="Company"></ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+      <div class='selected-column'>
+        <h4>Selections <small>({{selected?.length}})</small></h4>
+        <ul>
+          <li *ngFor='let sel of selected'>
+            {{sel.name}}
+          </li>
+          <li *ngIf="!selected?.length">No Selections</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+

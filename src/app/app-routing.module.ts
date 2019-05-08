@@ -11,6 +11,7 @@ import {LoginComponent} from './components/login/login.component';
 import {WorkspaceGuardService} from './services/gard/workspace-guard.service';
 import {LoginGuardService} from './services/gard/login-guard.service';
 import {FreeComponent} from './components/workspace/cy/free/free.component';
+import {TableComponent} from './components/workspace/table/table.component';
 
 const routesRoot: Routes = [
   {path: '', redirectTo: '/workspace/free', pathMatch: 'full'},
@@ -24,7 +25,8 @@ const routesRoot: Routes = [
       {path: 'node-types', component: NodeTypesComponent},
       {path: 'edge-types', component: EdgeTypesComponent},
       {path: 'edge-arrow-types', component: EdgeArrowTypesComponent},
-      {path: 'cola', component: ColaComponent}
+      {path: 'cola', component: ColaComponent},
+      {path: 'table', component: TableComponent}
     ]
   },
   {path: '**', redirectTo: '/'},

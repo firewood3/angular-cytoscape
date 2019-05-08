@@ -25,6 +25,8 @@ import {ErrorInterceptor, TokenInterceptor} from './services/interceptor/token-i
 import { FreeComponent } from './components/workspace/cy/free/free.component';
 import {eleStateReducers} from './ngrx/reducers/ele.reducers';
 import {EleEffects} from './ngrx/effects/ele.effects';
+import { TableComponent } from './components/workspace/table/table.component';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -38,9 +40,11 @@ import {EleEffects} from './ngrx/effects/ele.effects';
     ColaComponent,
     LoginComponent,
     WorkspaceComponent,
-    FreeComponent
+    FreeComponent,
+    TableComponent
   ],
   imports: [
+    NgxDatatableModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

@@ -1,0 +1,16 @@
+#canvas {
+  height: 100%;
+  width: 85%;
+  position: absolute;
+  left: 250px;
+  top: 0;
+}
+
+#table {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 400px;
+  width: 700px;
+  border: 1px solid black;
+}
